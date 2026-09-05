@@ -1,0 +1,30 @@
+name: Install Premium Stay site
+
+on:
+  push:
+    paths:
+      - 'premiumstay-ba-site.zip'
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Extract site
+        run: |
+          rm -rf assets admin.html index.html
+          unzip -o premiumstay-ba-site.zip -d .
+          rm premiumstay-ba-site.zip
+
+      - name: Commit site files
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git diff --cached --quiet || git commit -m 'Install Premium Stay website'
+          git push
