@@ -28,9 +28,9 @@
 <main class="info">
 <p class="eyebrow">PREMIUM STAY SARAJEVO</p>
 <h1>Galerija</h1>
-<p>Fotografije Premium Stay Sarajevo. Galerija se automatski ažurira prema fotografijama koje se nalaze u repozitoriju sajta.</p>
+<p>Fotografije Premium Stay Sarajevo.</p>
 <div id="gallery" class="gallery-grid" aria-live="polite"></div>
-<div id="gallery-empty" class="gallery-empty" hidden>Nema dodatih fotografija. Dodajte JPG, JPEG, PNG ili WEBP fotografiju u repozitorij i ona će se automatski pojaviti ovdje.</div>
+<div id="gallery-empty" class="gallery-empty" hidden>Nema dodatih fotografija.</div>
 <br>
 <a class="btn primary" href="contact.html">KONTAKT &amp; REZERVACIJA →</a>
 </main>
@@ -43,26 +43,36 @@
 
 <script>
 const repoApi='https://api.github.com/repos/apartmangm/premiumstay.ba/contents/?ref=main';
+const orderApi='https://api.github.com/repos/apartmangm/premiumstay.ba/contents/gallery-order.json?ref=main';
 const excluded=['hero.jpg','logo-header.jpg','logo.svg'];
 const gallery=document.getElementById('gallery');
 const empty=document.getElementById('gallery-empty');
 const lightbox=document.getElementById('lightbox');
 const lightboxImage=document.getElementById('lightbox-image');
-
-function caption(name){
-  return name.replace(/\.[^.]+$/,'').replace(/[_-]+/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
-}
-
+function caption(name){return name.replace(/\.[^.]+$/,'').replace(/[_-]+/g,' ').replace(/\b\w/g,c=>c.toUpperCase())}
 async function loadGallery(){
   try{
-    const response=await fetch(repoApi,{cache:'no-store'});
-    if(!response.ok) throw new Error('Gallery request failed');
-    const files=await response.json();
-    const images=files.filter(file=>file.type==='file' && /\.(jpe?g|png|webp)$/i.test(file.name) && !excluded.includes(file.name));
+    const [rootResponse,orderResponse]=await Promise.all([fetch(repoApi,{cache:'no-store'}),fetch(orderApi,{cache:'no-store'})]);
+    if(!rootResponse.ok)throw new Error('Gallery request failed');
+    const files=await rootResponse.json();
+    const images=files.filter(file=>file.type==='file'&&/\.(jpe?g|png|webp)$/i.test(file.name)&&!excluded.includes(file.name));
+    let ordered=images;
+    if(orderResponse.ok){
+      try{
+        const orderFile=await orderResponse.json();
+        const json=JSON.parse(decodeURIComponent(escape(atob(orderFile.content.replace(/\n/g,'')))));
+        const byName=new Map(images.map(x=>[x.name,x]));
+        if(Array.isArray(json.images)){
+          ordered=json.images.filter(n=>byName.has(n)).map(n=>byName.get(n));
+          const used=new Set(ordered.map(x=>x.name));
+          ordered.push(...images.filter(x=>!used.has(x.name)));
+        }
+      }catch(e){}
+    }
     gallery.innerHTML='';
-    if(!images.length){empty.hidden=false;return;}
+    if(!ordered.length){empty.hidden=false;return}
     empty.hidden=true;
-    images.forEach(file=>{
+    ordered.forEach(file=>{
       const figure=document.createElement('figure');
       const image=document.createElement('img');
       image.src='./'+encodeURIComponent(file.name);
@@ -71,21 +81,14 @@ async function loadGallery(){
       const figcaption=document.createElement('figcaption');
       figcaption.textContent=caption(file.name);
       figure.append(image,figcaption);
-      figure.addEventListener('click',()=>{
-        lightboxImage.src=image.src;
-        lightboxImage.alt=image.alt;
-        lightbox.classList.add('open');
-      });
+      figure.addEventListener('click',()=>{lightboxImage.src=image.src;lightboxImage.alt=image.alt;lightbox.classList.add('open')});
       gallery.appendChild(figure);
     });
-  }catch(error){
-    gallery.innerHTML='<div class="gallery-empty">Galerija trenutno nije mogla učitati fotografije. Osvježite stranicu.</div>';
-  }
+  }catch(error){gallery.innerHTML='<div class="gallery-empty">Galerija trenutno nije mogla učitati fotografije. Osvježite stranicu.</div>'}
 }
-
 document.querySelector('.gallery-close').addEventListener('click',()=>lightbox.classList.remove('open'));
-lightbox.addEventListener('click',e=>{if(e.target===lightbox) lightbox.classList.remove('open')});
-document.addEventListener('keydown',e=>{if(e.key==='Escape') lightbox.classList.remove('open')});
+lightbox.addEventListener('click',e=>{if(e.target===lightbox)lightbox.classList.remove('open')});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')lightbox.classList.remove('open')});
 loadGallery();
 </script>
 </body>
