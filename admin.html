@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="bs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Galerija – administracija | Premium Stay Sarajevo</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="style.css">
+<style>
+.admin{max-width:1050px;margin:auto;padding:55px 20px 80px}.admin h1{font:500 44px Georgia,serif;margin:0 0 12px}.admin-lead{color:#bdb7ab;margin:0 0 30px}.panel{border:1px solid #4f411f;background:#101113;padding:24px;margin:18px 0}.panel h2{font:500 25px Georgia,serif;margin:0 0 16px;color:#e7c56e}.token-row{display:flex;gap:10px}.token-row input{flex:1;min-width:0}.admin input[type=password],.admin input[type=text]{width:100%;background:#0b0c0e;color:#f5f2ea;border:1px solid #655225;padding:15px;font-size:15px;border-radius:2px}.admin button,.admin .btn{border:1px solid #b38a3b;background:#ddb34f;color:#111;padding:14px 18px;font-size:14px;cursor:pointer}.admin button.secondary{background:#101113;color:#e7bd58}.status{margin-top:12px;color:#bbb6ad;min-height:22px}.upload-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.upload-label{display:inline-block;background:#ddb34f;color:#111;border:1px solid #b38a3b;padding:15px 20px;cursor:pointer;font-weight:700}.upload-label input{display:none}.gallery-admin{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.photo-card{border:1px solid #4f411f;background:#0b0c0e;padding:10px;position:relative}.photo-card.dragging{opacity:.45}.photo-card img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}.photo-name{font-size:12px;color:#aaa;margin:9px 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.photo-actions{display:flex;gap:7px}.photo-actions button{flex:1;padding:10px 6px;font-size:12px}.drag-hint{color:#9f998e;font-size:13px;margin:0 0 16px}.empty{padding:35px;text-align:center;border:1px dashed #4f411f;color:#aaa}.danger{background:#2a1818!important;color:#f0b2a7!important;border-color:#6d3b34!important}.hidden{display:none!important}
+@media(max-width:800px){.admin{padding:40px 16px 65px}.admin h1{font-size:36px}.token-row{flex-direction:column}.token-row button{width:100%}.gallery-admin{grid-template-columns:repeat(2,1fr);gap:10px}.photo-card{padding:7px}.photo-actions{flex-direction:column}.photo-actions button{width:100%}}
+@media(max-width:500px){.gallery-admin{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="site-header"><a class="brand" href="index.html" aria-label="Premium Stay Sarajevo"><img class="brand-logo" src="logo-header.jpg" alt="Premium Stay Apartment Sarajevo"></a><a class="header-call" href="gallery.html">GALERIJA →</a></header>
+<nav class="tabs" aria-label="Glavna navigacija"><a href="index.html">APARTMAN</a><a class="active" href="gallery.html">GALERIJA</a><a href="location.html">⌖ &nbsp; LOKACIJA</a><a href="contact.html">KONTAKT &amp;<br>REZERVACIJA</a></nav>
+<main class="admin">
+<p class="eyebrow">PREMIUM STAY SARAJEVO</p>
+<h1>Upravljanje galerijom</h1>
+<p class="admin-lead">Dodavanje, brisanje i promjena redoslijeda fotografija na sajtu.</p>
+
+<section class="panel">
+<h2>1. Pristup</h2>
+<p class="admin-lead">Unesi svoj GitHub Fine-grained token. Token se ne čuva u ovoj stranici niti se šalje bilo gdje osim direktno GitHubu.</p>
+<div class="token-row"><input id="token" type="password" autocomplete="off" placeholder="GitHub token (Contents: Read and write)"><button id="connect">POVEŽI</button></div>
+<div id="status" class="status"></div>
+</section>
+
+<section id="controls" class="panel hidden">
+<h2>2. Fotografije</h2>
+<div class="upload-row">
+<label class="upload-label">+ DODAJ FOTOGRAFIJE<input id="upload" type="file" accept="image/jpeg,image/png,image/webp" multiple></label>
+<button id="refresh" class="secondary">OSVJEŽI</button>
+</div>
+<p class="drag-hint">Prevuci fotografiju na drugo mjesto da promijeniš redoslijed. Nakon toga pritisni „SPREMI REDOSLIJED“.</p>
+<div id="photos" class="gallery-admin"></div>
+<div id="empty" class="empty hidden">Nema fotografija u galeriji.</div>
+<br>
+<button id="saveOrder">SPREMI REDOSLIJED</button>
+<div id="orderStatus" class="status"></div>
+</section>
+</main>
+<footer><span>Premium Stay Sarajevo</span><span>premiumstay.ba</span></footer>
+
+<script>
+const OWNER='apartmangm';
+const REPO='premiumstay.ba';
+const BRANCH='main';
+const API=`https://api.github.com/repos/${OWNER}/${REPO}`;
+const excluded=new Set(['hero.jpg','logo-header.jpg','logo.svg']);
+let token='';
+let items=[];
+let dragIndex=null;
+
+const $=id=>document.getElementById(id);
+function setStatus(text,good=false){$('status').textContent=text;$('status').style.color=good?'#dcb65d':'#bbb6ad'}
+function setOrderStatus(text){$('orderStatus').textContent=text}
+function authHeaders(){return {'Accept':'application/vnd.github+json','Authorization':`Bearer ${token}`,'X-GitHub-Api-Version':'2022-11-28'}}
+
+async function api(url,options={}){
+  const r=await fetch(url,{...options,headers:{...authHeaders(),...(options.headers||{})}});
+  const data=await r.json().catch(()=>({}));
+  if(!r.ok) throw new Error(data.message||`GitHub greška ${r.status}`);
+  return data;
+}
+
+function isImage(name){return /\.(jpe?g|png|webp)$/i.test(name)&&!excluded.has(name)}
+function caption(name){return name.replace(/\.[^.]+$/,'').replace(/[_-]+/g,' ').replace(/\b\w/g,c=>c.toUpperCase())}
+
+async function getRoot(){return api(`${API}/contents/?ref=${BRANCH}`)}
+async function getOrder(){
+  try{return await api(`${API}/contents/gallery-order.json?ref=${BRANCH}`)}
+  catch(e){if(e.message.includes('Not Found'))return null;throw e}
+}
+
+async function load(){
+  try{
+    const [root,orderFile]=await Promise.all([getRoot(),getOrder()]);
+    const imageFiles=root.filter(x=>x.type==='file'&&isImage(x.name));
+    const byName=new Map(imageFiles.map(x=>[x.name,x]));
+    let ordered=[];
+    if(orderFile){
+      try{
+        const parsed=JSON.parse(decodeURIComponent(escape(atob(orderFile.content.replace(/\n/g,'')))));
+        if(Array.isArray(parsed.images)) ordered=parsed.images.filter(n=>byName.has(n)).map(n=>byName.get(n));
+      }catch(e){}
+    }
+    const used=new Set(ordered.map(x=>x.name));
+    ordered.push(...imageFiles.filter(x=>!used.has(x.name)));
+    items=ordered;
+    render();
+    setStatus(`Povezano. Pronađeno fotografija: ${items.length}`,true);
+    $('controls').classList.remove('hidden');
+  }catch(e){setStatus('Greška: '+e.message);$('controls').classList.add('hidden')}
+}
+
+function render(){
+  const box=$('photos');box.innerHTML='';$('empty').classList.toggle('hidden',items.length>0);
+  items.forEach((file,i)=>{
+    const card=document.createElement('article');card.className='photo-card';card.draggable=true;card.dataset.index=i;
+    const img=document.createElement('img');img.src=file.download_url;img.alt=caption(file.name);img.loading='lazy';
+    const name=document.createElement('div');name.className='photo-name';name.textContent=file.name;
+    const actions=document.createElement('div');actions.className='photo-actions';
+    const left=document.createElement('button');left.className='secondary';left.textContent='← LIJEVO';left.disabled=i===0;
+    const right=document.createElement('button');right.className='secondary';right.textContent='DESNO →';right.disabled=i===items.length-1;
+    const del=document.createElement('button');del.className='danger';del.textContent='OBRIŠI';
+    left.onclick=()=>move(i,i-1);right.onclick=()=>move(i,i+1);del.onclick=()=>removePhoto(i);
+    actions.append(left,right,del);card.append(img,name,actions);
+    card.addEventListener('dragstart',()=>{dragIndex=i;card.classList.add('dragging')});
+    card.addEventListener('dragend',()=>card.classList.remove('dragging'));
+    card.addEventListener('dragover',e=>e.preventDefault());
+    card.addEventListener('drop',e=>{e.preventDefault();if(dragIndex!==null&&dragIndex!==i)move(dragIndex,i);dragIndex=null});
+    box.appendChild(card);
+  });
+}
+function move(from,to){if(to<0||to>=items.length)return;const [x]=items.splice(from,1);items.splice(to,0,x);render()}
+
+async function removePhoto(i){
+  const file=items[i];
+  if(!confirm(`Obrisati fotografiju „${file.name}“?`))return;
+  setOrderStatus('Brišem fotografiju…');
+  try{
+    await api(`${API}/contents/${encodeURIComponent(file.name)}`,{method:'DELETE',body:JSON.stringify({message:`Delete gallery photo ${file.name}`,sha:file.sha,branch:BRANCH})});
+    items.splice(i,1);await saveOrder(true);render();setOrderStatus('Fotografija je obrisana.');
+  }catch(e){setOrderStatus('Greška: '+e.message)}
+}
+
+function resizedBase64(file){return new Promise((resolve,reject)=>{
+  const reader=new FileReader();reader.onerror=reject;reader.onload=()=>{
+    const img=new Image();img.onerror=reject;img.onload=()=>{
+      const max=2200;let w=img.naturalWidth,h=img.naturalHeight;
+      if(Math.max(w,h)>max){const s=max/Math.max(w,h);w=Math.round(w*s);h=Math.round(h*s)}
+      const c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d');ctx.drawImage(img,0,0,w,h);
+      c.toBlob(blob=>{if(!blob)return reject(new Error('Fotografija se ne može obraditi'));const r=new FileReader();r.onload=()=>resolve({base64:r.result.split(',')[1],type:'image/jpeg'});r.onerror=reject;r.readAsDataURL(blob)},'image/jpeg',.86);
+    };img.src=reader.result;
+  };reader.readAsDataURL(file);
+})}
+
+async function uploadFiles(fileList){
+  if(!fileList.length)return;setOrderStatus('Pripremam fotografije…');
+  try{
+    for(const file of fileList){
+      const {base64}=await resizedBase64(file);
+      const safeBase=`gallery-${Date.now()}-${Math.random().toString(36).slice(2,8)}.jpg`;
+      await api(`${API}/contents/${safeBase}`,{method:'PUT',body:JSON.stringify({message:`Add gallery photo ${safeBase}`,content:base64,branch:BRANCH})});
+    }
+    setOrderStatus('Fotografije su dodane.');$('upload').value='';await load();
+  }catch(e){setOrderStatus('Greška pri uploadu: '+e.message)}
+}
+
+async function saveOrder(silent=false){
+  const content=JSON.stringify({images:items.map(x=>x.name)},null,2)+'\n';
+  try{
+    const current=await getOrder();
+    const body={message:'Update gallery order',content:btoa(unescape(encodeURIComponent(content))),branch:BRANCH};
+    if(current)body.sha=current.sha;
+    await api(`${API}/contents/gallery-order.json`,{method:'PUT',body:JSON.stringify(body)});
+    if(!silent)setOrderStatus('Redoslijed je spremljen.');
+  }catch(e){setOrderStatus('Greška pri spremanju: '+e.message);throw e}
+}
+
+$('connect').onclick=()=>{token=$('token').value.trim();if(!token){setStatus('Unesi GitHub token.');return}load()};
+$('refresh').onclick=load;
+$('upload').addEventListener('change',e=>uploadFiles([...e.target.files]));
+$('saveOrder').onclick=()=>saveOrder(false);
+</script>
+</body>
+</html>
