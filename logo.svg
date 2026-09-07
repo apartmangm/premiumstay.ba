@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 427" role="img" aria-labelledby="title desc">
+<title id="title">Premium Stay Apartment Sarajevo</title>
+<desc id="desc">Premium Stay Apartment logo in gold on a dark background</desc>
+<rect width="1536" height="427" fill="#101318"/>
+<g fill="none" stroke="#e7bd58" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+  <path d="M38 247h104l55-137 59 137h49l0-54h36v54h19v-36h37v36h19v-27h37v27h42"/>
+  <path d="M197 247V190h48v57"/>
+  <path d="M198 190v-22c0-13 10-23 23-23s23 10 23 23v22"/>
+  <circle cx="221" cy="167" r="14"/>
+  <path d="M221 181v45m0-12h12"/>
+</g>
+<text x="412" y="237" fill="#e7bd58" font-family="Georgia, 'Times New Roman', serif" font-size="108" font-weight="700">Premium Stay</text>
+<g fill="#e7bd58">
+  <path d="M1262 164l9 26 27 1-21 17 7 27-22-15-23 15 8-27-22-17 27-1z"/>
+  <path d="M1338 164l9 26 27 1-21 17 7 27-22-15-23 15 8-27-22-17 27-1z"/>
+  <path d="M1414 164l9 26 27 1-21 17 7 27-22-15-23 15 8-27-22-17 27-1z"/>
+</g>
+<text x="1144" y="248" fill="#e7bd58" font-family="Arial, Helvetica, sans-serif" font-size="31" letter-spacing="12">APARTMENT</text>
+</svg>
