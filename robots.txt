@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
+
 Sitemap: https://premiumstay.ba/sitemap.xml
