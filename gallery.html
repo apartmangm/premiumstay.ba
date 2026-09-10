@@ -3,11 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Galerija | Premium Stay Sarajevo</title>
-<meta name="description" content="Galerija fotografija Premium Stay Sarajevo – pogledajte apartman i objekat u centru Sarajeva.">
+
+<title>Galerija | Premium Stay Sarajevo – Apartman u centru Sarajeva</title>
+
+<meta name="description" content="Galerija Premium Stay Sarajevo – pogledajte fotografije apartmana i objekta u centru Sarajeva. Premium smještaj, moderan apartman, privatni parking i udoban boravak.">
+
 <meta name="robots" content="index,follow">
+
 <link rel="canonical" href="https://premiumstay.ba/gallery.html">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Galerija | Premium Stay Sarajevo">
+<meta property="og:description" content="Pogledajte fotografije Premium Stay Sarajevo – apartman i premium smještaj u centru Sarajeva uz privatni parking.">
+<meta property="og:url" content="https://premiumstay.ba/gallery.html">
+<meta property="og:image" content="https://premiumstay.ba/hero.jpg">
+
 <link rel="stylesheet" href="style.css">
+
 <style>
 .gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:42px}
 .gallery-grid figure{overflow:hidden;cursor:pointer;transition:transform .2s,opacity .2s}
@@ -48,36 +60,139 @@
 @media(max-width:500px){.manage-grid{grid-template-columns:1fr}}
 </style>
 </head>
+
 <body>
-<header class="site-header"><a class="brand" href="index.html" aria-label="Premium Stay Sarajevo"><img class="brand-logo" src="logo-header.jpg" alt="Premium Stay Apartment Sarajevo"></a><a class="header-call" href="tel:+38765654123">REZERVACIJA →</a></header>
-<nav class="tabs" aria-label="Glavna navigacija"><a href="index.html">APARTMAN</a><a class="active" href="gallery.html">GALERIJA</a><a href="location.html">⌖ &nbsp; LOKACIJA</a><a href="contact.html">KONTAKT &amp;<br>REZERVACIJA</a></nav>
+
+<header class="site-header">
+<a class="brand" href="index.html" aria-label="Premium Stay Sarajevo">
+<img class="brand-logo"
+     src="logo-header.jpg"
+     alt="Premium Stay Sarajevo – premium apartman u centru Sarajeva">
+</a>
+<a class="header-call" href="tel:+38765654123">REZERVACIJA →</a>
+</header>
+
+<nav class="tabs" aria-label="Glavna navigacija">
+<a href="index.html">APARTMAN</a>
+<a class="active" href="gallery.html">GALERIJA</a>
+<a href="location.html">⌖ &nbsp; LOKACIJA</a>
+<a href="contact.html">KONTAKT &amp;<br>REZERVACIJA</a>
+</nav>
+
 <main class="info">
+
 <p class="eyebrow">PREMIUM STAY SARAJEVO</p>
-<h1>Galerija</h1>
-<p>Fotografije Premium Stay Sarajevo.</p>
+
+<h1>Galerija apartmana u centru Sarajeva</h1>
+
+<p>
+Pogledajte fotografije Premium Stay Sarajevo –
+moderan apartman i premium smještaj u centru Sarajeva,
+uz privatni parking neposredno ispred objekta.
+</p>
+
 <div id="gallery" class="gallery-grid" aria-live="polite"></div>
-<div id="gallery-empty" class="gallery-empty" hidden>Nema dodatih fotografija.</div>
+
+<div id="gallery-empty" class="gallery-empty" hidden>
+Nema dodatih fotografija.
+</div>
+
 <br>
-<a class="btn primary" href="contact.html">KONTAKT &amp; REZERVACIJA →</a>
+
+<a class="btn primary" href="contact.html">
+KONTAKT &amp; REZERVACIJA →
+</a>
+
 <section class="gallery-manage">
-<button id="manageToggle" class="manage-toggle" type="button">UPRAVLJANJE GALERIJOM</button>
+
+<button id="manageToggle" class="manage-toggle" type="button">
+UPRAVLJANJE GALERIJOM
+</button>
+
 <div id="managePanel" class="manage-panel hidden">
+
 <h2>Upravljanje galerijom</h2>
-<p>Ovdje možeš dodavati, brisati, opisivati i mijenjati redoslijed fotografija. GitHub token se koristi samo u ovom pregledniku i ne ugrađuje se u javni kod sajta.</p>
-<div class="token-row"><input id="token" type="password" autocomplete="off" placeholder="GitHub token — Contents: Read and write"><button id="connect" class="manage-btn" type="button">POVEŽI</button></div>
+
+<p>
+Ovdje možeš dodavati, brisati, opisivati i mijenjati redoslijed fotografija.
+GitHub token se koristi samo u ovom pregledniku i ne ugrađuje se u javni kod sajta.
+</p>
+
+<div class="token-row">
+<input id="token"
+       type="password"
+       autocomplete="off"
+       placeholder="GitHub token — Contents: Read and write">
+
+<button id="connect" class="manage-btn" type="button">
+POVEŽI
+</button>
+</div>
+
 <div id="status" class="manage-status"></div>
+
 <div id="controls" class="hidden">
-<div class="manage-upload"><label class="upload-label">+ DODAJ FOTOGRAFIJE<input id="upload" type="file" accept="image/jpeg,image/png,image/webp" multiple></label><button id="refresh" class="manage-btn secondary" type="button">OSVJEŽI</button><button id="saveOrder" class="manage-btn" type="button">SPREMI REDOSLIJED I OPIS</button></div>
-<p class="manage-hint">Upiši opis ispod svake fotografije. Možeš prevući fotografiju na drugo mjesto ili koristiti strelice. Promjene postaju javne tek nakon „SPREMI REDOSLIJED I OPIS“.</p>
+
+<div class="manage-upload">
+
+<label class="upload-label">
++ DODAJ FOTOGRAFIJE
+<input id="upload"
+       type="file"
+       accept="image/jpeg,image/png,image/webp"
+       multiple>
+</label>
+
+<button id="refresh" class="manage-btn secondary" type="button">
+OSVJEŽI
+</button>
+
+<button id="saveOrder" class="manage-btn" type="button">
+SPREMI REDOSLIJED I OPIS
+</button>
+
+</div>
+
+<p class="manage-hint">
+Upiši opis ispod svake fotografije. Možeš prevući fotografiju na drugo mjesto ili koristiti strelice.
+Promjene postaju javne tek nakon „SPREMI REDOSLIJED I OPIS“.
+</p>
+
 <div id="manageGrid" class="manage-grid"></div>
-<div id="manageEmpty" class="manage-empty hidden">Nema fotografija u galeriji.</div>
+
+<div id="manageEmpty" class="manage-empty hidden">
+Nema fotografija u galeriji.
+</div>
+
 <div id="orderStatus" class="manage-status"></div>
+
 </div>
 </div>
 </section>
+
 </main>
-<footer><span>Premium Stay Sarajevo</span><span>premiumstay.ba</span></footer>
-<div id="lightbox" class="gallery-lightbox" role="dialog" aria-modal="true" aria-label="Pregled fotografije"><button class="gallery-close" type="button" aria-label="Zatvori">×</button><img id="lightbox-image" src="" alt=""></div>
+
+<footer>
+<span>Premium Stay Sarajevo</span>
+<span>premiumstay.ba</span>
+</footer>
+
+<div id="lightbox"
+     class="gallery-lightbox"
+     role="dialog"
+     aria-modal="true"
+     aria-label="Pregled fotografije">
+
+<button class="gallery-close"
+        type="button"
+        aria-label="Zatvori">
+×
+</button>
+
+<img id="lightbox-image" src="" alt="">
+
+</div>
+
 <script>
 const OWNER='apartmangm';
 const REPO='premiumstay.ba';
@@ -133,7 +248,7 @@ async function loadPublicGallery(){
       const image=document.createElement('img');
       image.src='./'+encodeURIComponent(file.name);
       const description=(descriptions.get(file.name)||'').trim();
-      image.alt=description||'Premium Stay Sarajevo';
+      image.alt=description||'Premium Stay Sarajevo – apartman u centru Sarajeva';
       image.loading='lazy';
       const figcaption=document.createElement('figcaption');
       figcaption.textContent=description||'Premium Stay Sarajevo';
@@ -244,5 +359,6 @@ document.getElementById('upload').addEventListener('change',e=>uploadFiles([...e
 document.getElementById('saveOrder').onclick=()=>saveOrder(false);
 loadPublicGallery();
 </script>
+
 </body>
 </html>
