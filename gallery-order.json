@@ -26,23 +26,23 @@
     },
     {
       "name": "1000050117-1788796549119.jpg",
-      "description": "Ulaz u Premium stay 2"
+      "description": "Ulaz u \"Premium stay 1\""
     },
     {
       "name": "1000050118-1788796550886.jpg",
-      "description": "Ulaz u stubište"
+      "description": "Ulaz / stubište"
     },
     {
       "name": "1000050134-1788796436537.jpg",
-      "description": "Predsoblje u apartmanu Premium stay 2"
+      "description": "Predsoblje u apartmanu Premium stay 1"
     },
     {
       "name": "1000050133-1788796435043.jpg",
-      "description": "Predsoblje u apartmanu Premium stay 2"
+      "description": "Predsoblje u apartmanu Premium stay 1"
     },
     {
       "name": "1000050129-1788796372744.jpg",
-      "description": ""
+      "description": "Soba spavaća"
     },
     {
       "name": "1000050128-1788796374224.jpg",
@@ -89,10 +89,6 @@
       "description": "Kupatilo 1"
     },
     {
-      "name": "1000050142-1788796235771.jpg",
-      "description": "Dnevna soba sa kuhinjom i kupatilom"
-    },
-    {
       "name": "1000050149-1788796245345.jpg",
       "description": "Dnevna soba"
     },
@@ -101,23 +97,47 @@
       "description": "Dnevna soba"
     },
     {
-      "name": "1000050143-1788796237346.jpg",
-      "description": "Dnevna soba sa kuhinjom"
+      "name": "1000050155-1788796228800.jpg",
+      "description": "Dnevna soba"
     },
     {
-      "name": "1000050144-1788796239233.jpg",
-      "description": "Kuhinja / dnevna soba"
+      "name": "1000050156-1788796230709.jpg",
+      "description": "Dnevna soba"
     },
     {
       "name": "1000050140-1788796232275.jpg",
       "description": "Dnevna soba/pogled na parking ispred apartmana"
     },
     {
+      "name": "1000050143-1788796237346.jpg",
+      "description": "Dnevna soba sa kuhinjom"
+    },
+    {
+      "name": "1000050142-1788796235771.jpg",
+      "description": "Dnevna soba sa kuhinjom i kupatilom"
+    },
+    {
+      "name": "1000050152-1788796225718.jpg",
+      "description": "Dnevna soba/kuhinja"
+    },
+    {
+      "name": "1000050144-1788796239233.jpg",
+      "description": "Kuhinja / dnevna soba"
+    },
+    {
       "name": "1000050148-1788796243665.jpg",
       "description": "Kuhinja/dnevna soba"
     },
     {
+      "name": "1000050150-1788796246993.jpg",
+      "description": "Kuhinja"
+    },
+    {
       "name": "1000050146-1788796242122.jpg",
+      "description": "Kuhinja"
+    },
+    {
+      "name": "1000050154-1788796227241.jpg",
       "description": "Kuhinja"
     },
     {
@@ -125,19 +145,7 @@
       "description": "Kuhinja"
     },
     {
-      "name": "1000050150-1788796246993.jpg",
-      "description": "Kuhinja"
-    },
-    {
-      "name": "1000050141-1788796234226.jpg",
-      "description": "Dnevna soba/garderoba"
-    },
-    {
       "name": "1000050137-1788796317851.jpg",
-      "description": "Kuptilo 2"
-    },
-    {
-      "name": "1000050135-1788796316026.jpg",
       "description": "Kuptilo 2"
     },
     {
@@ -145,20 +153,12 @@
       "description": "Kupatilo 2"
     },
     {
-      "name": "1000050152-1788796225718.jpg",
-      "description": "Dnevna soba/kuhinja"
+      "name": "1000050135-1788796316026.jpg",
+      "description": "Kuptilo 2"
     },
     {
-      "name": "1000050154-1788796227241.jpg",
-      "description": "Kuhinja"
-    },
-    {
-      "name": "1000050155-1788796228800.jpg",
-      "description": "Dnevna soba"
-    },
-    {
-      "name": "1000050156-1788796230709.jpg",
-      "description": "Dnevna soba"
+      "name": "1000050141-1788796234226.jpg",
+      "description": "Dnevna soba/garderoba"
     }
   ]
 }
