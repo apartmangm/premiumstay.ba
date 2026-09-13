@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gallery | Premium Stay Sarajevo – Apartment in Central Sarajevo</title>
+<meta name="description" content="View photos of Premium Stay Sarajevo, a modern apartment in central Sarajevo with private parking and comfortable accommodation.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://premiumstay.ba/gallery-en.html">
+<link rel="alternate" hreflang="sr" href="https://premiumstay.ba/gallery.html">
+<link rel="alternate" hreflang="bs" href="https://premiumstay.ba/gallery.html">
+<link rel="alternate" hreflang="hr" href="https://premiumstay.ba/gallery.html">
+<link rel="alternate" hreflang="en" href="https://premiumstay.ba/gallery-en.html">
+<link rel="alternate" hreflang="x-default" href="https://premiumstay.ba/gallery.html">
+<link rel="stylesheet" href="style.css">
+<style>
+.lang-switch{display:flex;align-items:center;gap:8px;margin-left:auto;margin-right:16px;font-size:10px;letter-spacing:.08em;white-space:nowrap}
+.lang-switch a{color:#aeb1b6}
+.lang-switch a.active{color:#d4b46d;font-weight:700}
+.lang-switch span{color:#555}
+@media(max-width:800px){.lang-switch{font-size:8px;gap:5px;margin-right:8px}}
+</style>
+</head>
+<body>
+<header class="site-header">
+<a class="brand" href="index-en.html" aria-label="Premium Stay Sarajevo"><img class="brand-logo" src="logo-header.jpg" alt="Premium Stay Sarajevo"></a>
+<div class="lang-switch" aria-label="Language"><a href="gallery.html">SR / BS / HR</a><span>|</span><a class="active" href="gallery-en.html">EN</a></div>
+<a class="header-call" href="tel:+38765654123">BOOK NOW →</a>
+</header>
+<nav class="tabs" aria-label="Main navigation">
+<a href="index-en.html">APARTMENT</a>
+<a href="gallery-en.html">GALLERY</a>
+<a href="location-en.html">⌖ &nbsp; LOCATION</a>
+<a href="contact-en.html">CONTACT &amp;<br>BOOKING</a>
+</nav>
+<main class="info"><p class="eyebrow">PREMIUM STAY SARAJEVO</p>
+<h1>Gallery of the apartment in central Sarajevo</h1>
+<p>View photos of Premium Stay Sarajevo – a modern apartment and premium accommodation in central Sarajevo, with private parking directly in front of the property.</p>
+<div id="gallery" class="gallery-grid" aria-live="polite"></div>
+<div id="gallery-empty" class="gallery-empty" hidden>No photos have been added.</div>
+<br>
+<a class="btn primary" href="contact-en.html">CONTACT &amp; BOOKING →</a>
+<script>
+const OWNER='apartmangm',REPO='premiumstay.ba',BRANCH='main',API=`https://api.github.com/repos/${OWNER}/${REPO}`,excluded=new Set(['hero.jpg','logo-header.jpg','logo.svg','gallery-order.json']);
+const gallery=document.getElementById('gallery'),empty=document.getElementById('gallery-empty');
+function isImage(n){{return /\.(jpe?g|png|webp)$/i.test(n)&&!excluded.has(n)}}
+async function publicApi(url){{const r=await fetch(`${{url}}${{url.includes('?')?'&':'?'}}_=${{Date.now()}}`,{{cache:'no-store'}});if(!r.ok)throw Error('Request failed');return r.json()}}
+function decodeContent(c){{const raw=atob(c.replace(/\n/g,'')),b=Uint8Array.from(raw,x=>x.charCodeAt(0));return new TextDecoder().decode(b)}}
+function normalize(o){{if(!o||!Array.isArray(o.images))return [];return o.images.map(x=>typeof x==='string'?{{name:x,description:''}}:{{name:x.name||'',description:x.description||''}}).filter(x=>x.name)}}
+async function readOrder(){{try{{const r=await publicApi(`${{API}}/contents/gallery-order.json?ref=${{BRANCH}}`);return JSON.parse(decodeContent(r.content))}}catch(e){{return{{images:[]}}}}}}
+async function load(){{try{{const [files,order]=await Promise.all([publicApi(`${{API}}/contents/?ref=${{BRANCH}}`),readOrder()]);const images=files.filter(f=>f.type==='file'&&isImage(f.name)),by=new Map(images.map(x=>[x.name,x])),ord=normalize(order),desc=new Map(ord.map(x=>[x.name,x.description]));let a=[];ord.filter(x=>by.has(x.name)).forEach(x=>a.push(by.get(x.name)));const used=new Set(a.map(x=>x.name));a.push(...images.filter(x=>!used.has(x.name)));gallery.innerHTML='';empty.hidden=a.length>0;a.forEach(f=>{{const fig=document.createElement('figure'),img=document.createElement('img'),cap=document.createElement('figcaption'),d=(desc.get(f.name)||'').trim();img.src='./'+encodeURIComponent(f.name);img.alt=d||'Premium Stay Sarajevo – apartment in central Sarajevo';img.loading='lazy';cap.textContent=d||'Premium Stay Sarajevo';fig.append(img,cap);gallery.append(fig)}})}}catch(e){{gallery.innerHTML='<div class="gallery-empty">The gallery could not load the photos. Please refresh the page.</div>'}}}}
+load();
+</script></main>
+<footer><span>Premium Stay Sarajevo</span><span>premiumstay.ba</span></footer>
+</body>
+</html>
