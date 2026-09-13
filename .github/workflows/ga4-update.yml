@@ -1,0 +1,25 @@
+name: Update GA4 Measurement ID
+
+on:
+  push:
+    paths:
+      - ga4-update.txt
+
+permissions:
+  contents: write
+
+jobs:
+  update-ga4:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Update GA4 ID
+        run: |
+          sed -i "s/G-SGV468RQMO/G-6C7LS3LDCB/g" index.html
+          rm -f ga4-update.txt .github/workflows/ga4-update.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "Update Google Analytics 4 Measurement ID"
+          git push
