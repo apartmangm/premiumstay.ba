@@ -164,3 +164,737 @@ width:min(570px,47%);
 margin-left:auto;
 margin-right:7%;
 padding-top:110px;
+padding-bottom:70px
+}
+
+.eyebrow{
+letter-spacing:6px;
+color:#e2c77e;
+font-size:15px;
+margin:0 0 20px
+}
+
+.hero h1{
+font:500 clamp(48px,5.2vw,82px)/1.03 Georgia,serif;
+margin:0 0 28px;
+color:#fff
+}
+
+.gold-line{
+height:2px;
+width:95px;
+background:#d5ae51;
+margin:25px 0
+}
+
+.lead{
+font-size:21px;
+line-height:1.6;
+max-width:520px
+}
+
+.distance{
+font-size:17px;
+color:#e1c36f;
+margin:28px 0
+}
+
+.hero-actions{
+margin-top:10px
+}
+
+.btn{
+display:block;
+width:min(100%,440px);
+padding:22px 26px;
+margin:12px 0;
+border-radius:2px;
+text-align:left;
+font-size:17px;
+letter-spacing:.5px;
+transition:.2s
+}
+
+.btn:hover{
+transform:translateY(-1px)
+}
+
+.primary{
+background:#e4bc5c;
+color:#111;
+font-weight:700
+}
+
+.secondary{
+border:1px solid #d8b45e;
+color:#f4eee1;
+background:rgba(0,0,0,.28)
+}
+
+.facts{
+display:grid;
+grid-template-columns:repeat(6,1fr);
+background:#0d0f11;
+border-bottom:1px solid #b08737
+}
+
+.facts div{
+text-align:center;
+padding:30px 10px;
+border-right:1px solid #51431f
+}
+
+.facts div:last-child{
+border-right:0
+}
+
+.facts b{
+display:block;
+color:#e0b84e;
+font-size:35px;
+margin-bottom:10px
+}
+
+.facts strong,
+.facts span{
+display:block
+}
+
+.facts strong{
+font-size:16px
+}
+
+.facts span{
+color:#bbb6ad;
+margin-top:7px;
+font-size:14px
+}
+
+.section{
+max-width:1050px;
+margin:auto;
+padding:90px 25px
+}
+
+.intro{
+text-align:center
+}
+
+.intro h2,
+.cta h2{
+font:500 48px/1.1 Georgia,serif;
+margin:0 0 25px
+}
+
+.intro p:not(.eyebrow){
+font-size:20px;
+line-height:1.75;
+color:#d0cbc1
+}
+
+.intro p:last-child{
+max-width:760px;
+margin:0 auto
+}
+
+.details{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
+padding-top:20px
+}
+
+.detail-card{
+border:1px solid #4f411f;
+padding:34px 28px;
+min-height:220px;
+background:#101113
+}
+
+.detail-number{
+color:#dcb65d;
+font-size:13px;
+letter-spacing:3px
+}
+
+.detail-card h3{
+font:500 30px Georgia,serif;
+margin:22px 0 12px
+}
+
+.detail-card p{
+color:#bbb6ad;
+line-height:1.6;
+margin:0
+}
+
+.cta{
+max-width:1050px;
+margin:20px auto 90px;
+padding:70px 30px;
+text-align:center;
+border-top:1px solid #705621;
+border-bottom:1px solid #705621
+}
+
+.cta p:not(.eyebrow){
+font-size:19px;
+color:#c8c3b9;
+line-height:1.6
+}
+
+.cta .btn{
+margin:28px auto 0;
+text-align:center
+}
+
+footer{
+padding:30px 6%;
+border-top:1px solid #735821;
+color:#aaa;
+display:flex;
+justify-content:space-between;
+font-size:14px
+}
+
+@media(max-width:800px){
+
+.site-header{
+min-height:92px;
+height:92px;
+padding:0 4%;
+gap:8px
+}
+
+.brand{
+width:min(270px,58vw);
+height:78px;
+flex:1 1 auto
+}
+
+.brand-logo{
+width:100%;
+max-height:78px
+}
+
+.lang-switch{
+font-size:10px;
+gap:4px;
+margin:0 2px 0 0
+}
+
+.header-call{
+flex:0 0 auto;
+padding:12px 10px;
+font-size:10px
+}
+
+.tabs{
+grid-template-columns:1fr 1fr 1.1fr 1.25fr;
+gap:5px;
+padding:8px
+}
+
+.tabs a{
+min-height:76px;
+font-size:11px
+}
+
+.hero{
+min-height:0;
+height:auto;
+display:block;
+overflow:hidden;
+padding:0;
+background:#0b0c0e
+}
+
+.hero>img{
+position:relative;
+inset:auto;
+width:100%;
+height:auto;
+aspect-ratio:16/9;
+object-fit:cover;
+object-position:center center;
+display:block
+}
+
+.hero-shade{
+inset:0 0 auto 0;
+height:56.25vw;
+background:linear-gradient(
+180deg,
+rgba(0,0,0,.03) 0%,
+rgba(0,0,0,.08) 45%,
+rgba(0,0,0,.68) 100%
+);
+pointer-events:none
+}
+
+.hero-content{
+width:100%;
+margin:0;
+margin-top:-95px;
+padding:95px 24px 55px;
+position:relative;
+left:auto;
+bottom:auto;
+background:linear-gradient(
+180deg,
+rgba(11,12,14,0) 0,
+#0b0c0e 105px,
+#0b0c0e 100%
+)
+}
+
+.eyebrow{
+font-size:11px;
+letter-spacing:4px;
+margin-bottom:14px
+}
+
+.hero h1{
+font-size:clamp(38px,10vw,50px);
+line-height:1.05;
+margin-bottom:20px
+}
+
+.gold-line{
+width:82px;
+margin:20px 0
+}
+
+.lead{
+font-size:17px;
+line-height:1.55;
+max-width:520px
+}
+
+.distance{
+font-size:14px;
+line-height:1.5;
+margin:20px 0
+}
+
+.hero-actions{
+margin-top:8px
+}
+
+.btn{
+width:100%;
+font-size:13px;
+padding:18px 16px;
+margin:10px 0
+}
+
+.facts{
+grid-template-columns:repeat(3,1fr)
+}
+
+.facts div{
+padding:22px 5px
+}
+
+.facts b{
+font-size:27px;
+margin-bottom:9px
+}
+
+.facts strong{
+font-size:13px
+}
+
+.facts span{
+font-size:10px
+}
+
+.facts div:nth-child(3){
+border-right:0
+}
+
+.section{
+padding:65px 20px
+}
+
+.intro h2,
+.cta h2{
+font-size:38px
+}
+
+.intro p:not(.eyebrow){
+font-size:17px;
+line-height:1.65
+}
+
+.details{
+grid-template-columns:1fr;
+gap:12px
+}
+
+.detail-card{
+min-height:auto
+}
+
+.cta{
+margin:10px 20px 65px;
+padding:55px 20px
+}
+
+footer{
+padding:25px 5%;
+font-size:11px
+}
+
+}
+
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LodgingBusiness",
+  "name": "Premium Stay 1",
+  "url": "https://premiumstay.ba/index-en.html",
+  "image": "https://premiumstay.ba/hero.jpg",
+  "description": "Premium Stay 1 is a fully equipped and categorized 3-star apartment in Sarajevo. The apartment offers 50 m² of space, accommodation for up to 4 adults, 2 bathrooms, private parking, Wi-Fi and Smart TV.",
+  "telephone": "+38765654123",
+  "email": "premiumstay.sa@gmail.com",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Sarajevo",
+    "addressCountry": "BA"
+  },
+  "amenityFeature": [
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Private parking",
+      "value": true
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Wi-Fi",
+      "value": true
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Smart TV",
+      "value": true
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "2 bathrooms",
+      "value": true
+    }
+  ],
+  "starRating": {
+    "@type": "Rating",
+    "ratingValue": "3"
+  }
+}
+</script>
+
+</head>
+
+<body>
+
+<header class="site-header">
+
+<a class="brand"
+   href="index-en.html"
+   aria-label="Premium Stay Sarajevo – Premium Stay 1">
+
+<img class="brand-logo"
+     src="logo-header.jpg"
+     alt="Premium Stay Sarajevo – Premium Stay 1">
+
+</a>
+
+<div class="lang-switch" aria-label="Language">
+<a href="index.html">SR / BS / HR</a>
+<span>|</span>
+<a class="active" href="index-en.html">EN</a>
+</div>
+
+<a class="header-call" href="tel:+38765654123">
+BOOK NOW →
+</a>
+
+</header>
+
+
+<nav class="tabs" aria-label="Main navigation">
+
+<a class="active" href="index-en.html">
+APARTMENT
+</a>
+
+<a href="gallery-en.html">
+GALLERY
+</a>
+
+<a href="location-en.html">
+⌖ &nbsp; LOCATION
+</a>
+
+<a href="contact-en.html">
+CONTACT &amp;<br>BOOKING
+</a>
+
+</nav>
+
+
+<main>
+
+<section class="hero">
+
+<img
+src="hero.jpg"
+alt="Premium Stay 1 – modern apartment in Sarajevo with private parking"
+>
+
+<div class="hero-shade"></div>
+
+<div class="hero-content">
+
+<p class="eyebrow">
+PREMIUM STAY SARAJEVO
+</p>
+
+<h1>
+Premium Stay 1<br>
+Apartment in Central Sarajevo
+</h1>
+
+<div class="gold-line"></div>
+
+<p class="lead">
+A fully equipped and categorized 3-star apartment
+for guests seeking comfort, privacy and an excellent city location.
+</p>
+
+<p class="distance">
+⌖ &nbsp; About 700 m from Sarajevo City Center (SCC)
+</p>
+
+<div class="hero-actions">
+
+<a class="btn primary" href="contact-en.html">
+▣ &nbsp; BOOK DIRECT &nbsp; →
+</a>
+
+<a class="btn secondary" href="#apartment">
+▷ &nbsp; VIEW APARTMENT
+</a>
+
+<a class="btn secondary" href="location-en.html">
+⌖ &nbsp; VIEW LOCATION
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="facts" id="apartment">
+
+<div>
+<b>⌖</b>
+<strong>Central Sarajevo</strong>
+<span>about 700 m from SCC</span>
+</div>
+
+<div>
+<b>▱</b>
+<strong>Up to 4 adults</strong>
+<span>comfortable stay</span>
+</div>
+
+<div>
+<b>↗</b>
+<strong>50 m²</strong>
+<span>modern space</span>
+</div>
+
+<div>
+<b>♨</b>
+<strong>2 bathrooms</strong>
+<span>for a comfortable stay</span>
+</div>
+
+<div>
+<b>Ⓟ</b>
+<strong>Private parking</strong>
+<span>in front of the property</span>
+</div>
+
+<div>
+<b>⌁</b>
+<strong>Fast Wi-Fi</strong>
+<span>and Smart TV</span>
+</div>
+
+</section>
+
+
+<section class="section intro">
+
+<p class="eyebrow">
+PREMIUM STAY 1
+</p>
+
+<h2>
+Premium Stay 1 – Apartment in Central Sarajevo
+</h2>
+
+<p>
+Premium Stay 1 is a fully equipped and categorized private
+3-star apartment in Sarajevo. With 50 m² of space, it is designed
+for stays of up to four adults and provides guests with comfort,
+privacy and a convenient city location.
+</p>
+
+<p>
+If you are looking for an apartment in central Sarajevo, a
+short-term apartment rental or premium accommodation with
+private parking, Premium Stay 1 offers a simple and comfortable stay.
+A particular advantage is the private parking located directly
+in front of the property, which is especially convenient for guests
+arriving in Sarajevo by car. Sarajevo City Center (SCC) is about 700 m away.
+</p>
+
+</section>
+
+
+<section class="section details">
+
+<div class="detail-card">
+
+<span class="detail-number">01</span>
+
+<h3>
+Comfortable Accommodation
+</h3>
+
+<p>
+50 m² of carefully designed space for a comfortable stay in Sarajevo,
+whether you are visiting for a weekend, holiday or business trip.
+Premium Stay 1 is fully equipped and ready for guests.
+</p>
+
+</div>
+
+
+<div class="detail-card">
+
+<span class="detail-number">02</span>
+
+<h3>
+Private Parking
+</h3>
+
+<p>
+Private parking directly in front of the property makes arrival easy
+and provides convenient parking throughout your stay in Sarajevo.
+</p>
+
+</div>
+
+
+<div class="detail-card">
+
+<span class="detail-number">03</span>
+
+<h3>
+Excellent Location
+</h3>
+
+<p>
+The apartment is located in Sarajevo, about 700 m from Sarajevo City Center,
+with easy access to city attractions, amenities and public transportation.
+</p>
+
+</div>
+
+</section>
+
+
+<section class="section details">
+
+<div class="detail-card">
+
+<span class="detail-number">04</span>
+
+<h3>
+Premium Stay 2 – Coming Soon
+</h3>
+
+<p>
+The second apartment is in the final stage of preparation,
+furnishing and categorization. Once completed, it will be presented
+as Premium Stay 2 and will be available for separate reservations.
+</p>
+
+</div>
+
+
+<div class="detail-card">
+
+<span class="detail-number">05</span>
+
+<h3>
+Premium Stay 3 – Future Combined Offer
+</h3>
+
+<p>
+Once Premium Stay 1 and Premium Stay 2 are fully operational,
+both apartments will be available for rental together as Premium Stay 3 –
+a total of 120 m² of space for up to 8 adults.
+</p>
+
+</div>
+
+</section>
+
+
+<section class="cta">
+
+<p class="eyebrow">
+DIRECT BOOKING
+</p>
+
+<h2>
+Planning a stay in Sarajevo?
+</h2>
+
+<p>
+Premium Stay 1 is currently available for booking.
+If you are looking for an apartment in Sarajevo with private parking,
+check availability and arrange your reservation directly with us.
+</p>
+
+<a class="btn primary" href="contact-en.html">
+CONTACT &amp; BOOK NOW →
+</a>
+
+</section>
+
+</main>
+
+
+<footer>
+
+<span>
+Premium Stay Sarajevo
+</span>
+
+<span>
+premiumstay.ba
+</span>
+
+</footer>
+
+</body>
+</html>
