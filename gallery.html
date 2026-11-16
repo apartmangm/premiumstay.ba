@@ -446,7 +446,8 @@
 
   <div
     id="gallery-loading"
-    class="gallery-loading">
+    class="gallery-loading"
+    hidden>
     Učitavanje fotografija…
   </div>
 
@@ -601,7 +602,7 @@ function closeLightbox(){
 
 async function loadGallery(){
 
-  loading.hidden = false;
+  loading.hidden = true;
   empty.hidden = true;
   errorBox.hidden = true;
 
@@ -639,9 +640,13 @@ async function loadGallery(){
 
     if(!items.length){
 
-      empty.hidden = false;
+      if(!gallery.children.length) empty.hidden = false;
 
       return;
+    }
+
+    if(items.length){
+      gallery.innerHTML='';
     }
 
     items.forEach(function(item,index){
@@ -660,7 +665,7 @@ async function loadGallery(){
     );
 
     loading.hidden = true;
-    errorBox.hidden = false;
+    if (!gallery.children.length) errorBox.hidden = false;
 
   }
 }
